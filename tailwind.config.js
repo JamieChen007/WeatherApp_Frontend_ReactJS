@@ -2,7 +2,11 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        alimama: ["AlimamaFangYuanTiVF-Square", "sans"],
+      },
+    },
   },
   mode: "jit",
   plugins: [],
