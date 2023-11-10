@@ -3,27 +3,65 @@ import Forecast from "./components/Forecast";
 import OtherCities from "./components/OtherCities";
 import SearchBar from "./components/SearchBar";
 
-const WeatherCard = () => {
+const WeatherCard = ({
+  isLoading,
+  weatherDataList,
+  getSearchCity,
+  forecastData,
+  getOtherCityClick,
+}) => {
+  const currentCityData = weatherDataList[0];
+  const otherCitiesDataList = [...weatherDataList];
+  otherCitiesDataList.shift();
   return (
-    <div className="rounded-3xl w-4/5 h-4/5 mx-auto bg-white shadow-blue-800 overflow-hidden grid grid-cols-6 grid-rows-6 gap-4">
-      <div
-        className="row-span-6 rounded-3xl col-span-2 border-8 "
-        style={{
-          backgroundImage:
-            "linear-gradient(152deg,#899bf0 1%,#3f55e4 54%,#3f55e4 96%)",
-        }}
-      >
-        <CurrentCity />
-      </div>
-      <div className="row-span-3 col-span-4 border-8 m-6">
-        <Forecast />
-      </div>
-      <div className="row-span-1 col-span-4 border-8 m-6">
-        <SearchBar />
-      </div>
-      <div className="row-span-2 col-span-4 border-8 m-6">
-        <OtherCities />
-      </div>
+    <div className="max-h-[1000px] max-md:h-full max-md:flex max-md:flex-col max-w-[1650px] p-6 rounded-3xl w-4/5 h-4/5 mx-auto bg-slate-100 shadow-blue-800 overflow-hidden grid grid-cols-6 grid-rows-6 gap-4">
+      {isLoading ? (
+        <div className="row-span-6 col-span-6 max-md:h-full text-5xl flex items-center justify-center">
+          <p>Data is loading...</p>
+        </div>
+      ) : (
+        <>
+          <div
+            className="row-span-6 rounded-3xl col-span-2"
+            style={{
+              backgroundImage:
+                "linear-gradient(152deg,#899bf0 1%,#3f55e4 54%,#3f55e4 96%)",
+            }}
+          >
+            {currentCityData ? (
+              <CurrentCity weatherData={currentCityData} />
+            ) : (
+              <div className="h-full text-3xl flex items-center justify-center">
+                <p>Data not found</p>
+              </div>
+            )}
+          </div>
+          <div className="row-span-3 col-span-4 mx-6 flex flex-col justify-center">
+            {forecastData.length > 0 ? (
+              <Forecast forecastData={forecastData} />
+            ) : (
+              <div className="text-3xl flex items-center justify-center">
+                <p>Forecast data not found</p>
+              </div>
+            )}
+          </div>
+          <div className="row-span-1 col-span-4 mx-6 flex items-center max-md:order-first">
+            <SearchBar getSearchCity={getSearchCity} />
+          </div>
+          <div className="row-span-2 col-span-4 mx-6">
+            {otherCitiesDataList.length > 0 ? (
+              <OtherCities
+                weatherDataList={otherCitiesDataList}
+                getOtherCityClick={getOtherCityClick}
+              />
+            ) : (
+              <div className="h-full text-3xl flex items-center justify-center">
+                <p>Other cites data not found</p>
+              </div>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 };

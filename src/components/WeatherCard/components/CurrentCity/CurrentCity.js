@@ -5,19 +5,73 @@ import Temperature from "./components/Temperature";
 import TemperatureRange from "../../../TemperatureRange";
 import WeatherIcon from "../../../WeatherIcon";
 import Image from "./components/Image";
-import bg from "./assets/Cloudy_day_background.png";
-import icon from "../../../WeatherIcon/assets/Cloudy_day.png";
+import Clouds from "./assets/Cloudy_day_background.png";
+import Hail from "./assets/Hail_background.png";
+import Rain from "./assets/Rain_background.png";
+import Snow from "./assets/Snow_background.png";
+import Clear from "./assets/Sunny day_background.png";
+import Cloudy_dayIcon from "../../../WeatherIcon/assets/Cloudy_day.png";
+import CloudyIcon from "../../../WeatherIcon/assets/Cloudy.png";
+import HailIcon from "../../../WeatherIcon/assets/Hail.png";
+import RainIcon from "../../../WeatherIcon/assets/Rain.png";
+import SnowIcon from "../../../WeatherIcon/assets/Snow.png";
+import SunnyIcon from "../../../WeatherIcon/assets/Sunny.png";
 
-const CurrentCity = () => {
+const CurrentCity = ({ weatherData }) => {
+  let imgUrl;
+  let icon;
+  switch (weatherData.weather) {
+    case "Clear":
+      imgUrl = Clear;
+      icon = SunnyIcon;
+      break;
+    case "Clouds":
+      imgUrl = Clouds;
+      icon = CloudyIcon;
+      break;
+    case "Hail":
+      imgUrl = Hail;
+      icon = HailIcon;
+      break;
+    case "Rain":
+      imgUrl = Rain;
+      icon = RainIcon;
+      break;
+    case "Snow":
+      imgUrl = Snow;
+      icon = SnowIcon;
+      break;
+    default:
+      imgUrl = Clouds;
+      icon = CloudyIcon;
+      break;
+  }
+
   return (
-    <div className="relative flex flex-col items-center space-y-6">
-      <Image imageUrl={bg} alt="cloud" className="absolute top-0 right-0" />
-      <Date value="20 July, Sunday 2023" className="text-white" />
-      <Name value="New York" className="text-white text-3xl font-bold" />
-      <Temperature value="20" className="text-slate-200 text-8xl font-bold" />
-      <TemperatureRange value="18 ~ 23" className="text-white" />
+    <div className="relative flex flex-col items-center h-full justify-around p-3">
+      <Image
+        imageUrl={imgUrl}
+        alt={weatherData.weather}
+        className="absolute top-0 right-0"
+      />
+      <Date
+        value={weatherData.dateTime}
+        className="text-white text-left  text-1xl w-11/12"
+      />
+      <Name
+        value={weatherData.cityName}
+        className="text-white text-3xl font-bold"
+      />
+      <Temperature
+        value={weatherData.currentTemp}
+        className="text-slate-200 text-8xl font-bold"
+      />
+      <TemperatureRange
+        value={`${weatherData.minTemp} ~ ${weatherData.maxTemp}`}
+        className="text-white text-1xl"
+      />
       <WeatherIcon imgUrl={icon} alt="cloud" />
-      <Meta />
+      <Meta weatherData={weatherData} />
     </div>
   );
 };
