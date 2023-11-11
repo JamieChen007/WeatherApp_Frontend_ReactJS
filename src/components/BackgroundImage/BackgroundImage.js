@@ -1,6 +1,6 @@
 const BackgroundImage = ({
   imageUrl,
-  alt = "desc xxxx",
+  alt = "weatherApp background",
   className,
   children,
 }) => {

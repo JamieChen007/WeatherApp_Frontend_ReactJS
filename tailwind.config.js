@@ -16,6 +16,9 @@ module.exports = {
           "0 45px 65px rgba(0, 0, 0, 0.15)",
         ],
       },
+      screens: {
+        xs: "550px",
+      },
     },
   },
   mode: "jit",

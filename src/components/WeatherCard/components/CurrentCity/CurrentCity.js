@@ -48,7 +48,7 @@ const CurrentCity = ({ weatherData }) => {
   }
 
   return (
-    <div className="relative flex flex-col items-center h-full justify-around p-3">
+    <div className="relative flex flex-col items-center h-full justify-around p-3 max-xs:min-h-[550px]">
       <Image
         imageUrl={imgUrl}
         alt={weatherData.weather}

@@ -161,12 +161,16 @@ function App() {
     setCitiesList(newCitiesFilterList);
   };
 
+  useEffect(() => {
+    console.log("forecastData", forecastData);
+  }, [forecastData]);
+
   return (
     <BackgroundImage
       imageUrl={bg}
       alt="cloud"
       className={
-        "h-screen max-md:h-full max-md:py-6 bg-cover flex items-center font-alimama"
+        "h-screen max-md:h-full max-md:py-6 max-xs:py-3 bg-cover bg-center flex items-center font-alimama"
       }
     >
       {isError && (

@@ -13,10 +13,11 @@ const WeatherCard = ({
   const currentCityData = weatherDataList[0];
   const otherCitiesDataList = [...weatherDataList];
   otherCitiesDataList.shift();
+
   return (
-    <div className="max-h-[1000px] max-md:h-full max-md:flex max-md:flex-col max-w-[1650px] p-6 rounded-3xl w-4/5 h-4/5 mx-auto bg-slate-100 shadow-blue-800 overflow-hidden grid grid-cols-6 grid-rows-6 gap-4">
+    <div className="max-h-[1000px] max-xl:w-[90%] max-lg:w-[95%] max-md:h-full max-md:flex max-md:flex-col max-w-[1650px] p-6 max-xs:p-2 rounded-3xl w-4/5 h-4/5 mx-auto bg-slate-100 shadow-blue-800 overflow-hidden grid grid-cols-6 grid-rows-6 gap-4">
       {isLoading ? (
-        <div className="row-span-6 col-span-6 max-md:h-full text-5xl flex items-center justify-center">
+        <div className="row-span-6 col-span-6 max-md:h-screen text-5xl flex items-center justify-center">
           <p>Data is loading...</p>
         </div>
       ) : (
@@ -36,7 +37,7 @@ const WeatherCard = ({
               </div>
             )}
           </div>
-          <div className="row-span-3 col-span-4 mx-6 flex flex-col justify-center">
+          <div className="row-span-3 col-span-4 mx-6 flex flex-col justify-center max-xs:w-full max-xs:mx-0">
             {forecastData.length > 0 ? (
               <Forecast forecastData={forecastData} />
             ) : (
@@ -45,7 +46,7 @@ const WeatherCard = ({
               </div>
             )}
           </div>
-          <div className="row-span-1 col-span-4 mx-6 flex items-center max-md:order-first">
+          <div className="row-span-1 col-span-4 mx-6 flex items-center max-md:order-first max-md:mx-0">
             <SearchBar getSearchCity={getSearchCity} />
           </div>
           <div className="row-span-2 col-span-4 mx-6">
